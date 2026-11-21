@@ -1,0 +1,988 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Wealth Roots - Panel de Padres</title>
+<!-- Google Fonts: Quicksand & Fredoka for cozy, rounded tactile typography -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=Quicksand:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Custom Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cozy: {
+              cream: '#FBF5E8',
+              board: '#F5ECDB',
+              card: '#FFFDF9',
+              cardInner: '#FAF3E3',
+              stitch: '#C8B291',
+              stitchDark: '#A68D6E',
+              brown: '#4A3525',
+              muted: '#7A624E',
+              red: '#D9453B',
+              redDark: '#B32B22',
+              green: '#569E3D',
+              greenDark: '#3F7B2A',
+              orange: '#E87A24',
+              gold: '#F3A41D',
+              goldLight: '#FDEFD0',
+              blue: '#4A86C6'
+            }
+          },
+          fontFamily: {
+            fredoka: ['"Fredoka"', 'cursive', 'sans-serif'],
+            quicksand: ['"Quicksand"', 'sans-serif']
+          },
+          boxShadow: {
+            'stitched': '0 3px 0 #D0BD9F, 0 6px 12px rgba(88, 59, 32, 0.08)',
+            'stitched-sm': '0 2px 0 #D0BD9F, 0 3px 6px rgba(88, 59, 32, 0.06)',
+            'plush-red': 'inset 0 1px 0 rgba(255,255,255,0.4), 0 3px 0 #9E241C, 0 6px 8px rgba(158, 36, 28, 0.25)',
+            'plush-green': 'inset 0 1px 0 rgba(255,255,255,0.4), 0 3px 0 #366B24, 0 6px 8px rgba(54, 107, 36, 0.25)',
+            'plush-orange': 'inset 0 1px 0 rgba(255,255,255,0.4), 0 3px 0 #B35810, 0 5px 8px rgba(179, 88, 16, 0.25)',
+            'plush-gold': 'inset 0 1px 0 rgba(255,255,255,0.6), 0 3px 0 #B8780E, 0 5px 8px rgba(184, 120, 14, 0.22)',
+            'inset-felt': 'inset 0 2px 4px rgba(74, 53, 37, 0.1)'
+          }
+        }
+      }
+    }
+  </script>
+<!-- BEGIN: Custom Cozy Styling (Stitches, Knitted textures & Felt effects) -->
+<style data-purpose="textures-and-stitches">
+    body {
+      background-color: #FAF3E3;
+      background-image: radial-gradient(#E8DBC3 0.75px, transparent 0.75px);
+      background-size: 16px 16px;
+      color: #4A3525;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    /* Tactile dashed felt border */
+    .border-stitched {
+      border: 2px dashed #C8B291;
+    }
+    .border-stitched-thick {
+      border: 2.5px dashed #B89E78;
+    }
+    .border-stitched-white {
+      border: 2px dashed rgba(255, 255, 255, 0.65);
+    }
+    .border-stitched-green {
+      border: 2px dashed #6DAF50;
+    }
+    .border-stitched-gold {
+      border: 2px dashed #DF9F27;
+    }
+
+    /* Knitted / Woven Fabric Ribbing Effect */
+    .knit-pattern-red {
+      background: linear-gradient(135deg, #E04E44 25%, #D43E34 25%, #D43E34 50%, #E04E44 50%, #E04E44 75%, #D43E34 75%, #D43E34 100%);
+      background-size: 10px 10px;
+    }
+    .knit-pattern-green {
+      background: linear-gradient(135deg, #5CA943 25%, #4E9836 25%, #4E9836 50%, #5CA943 50%, #5CA943 75%, #4E9836 75%, #4E9836 100%);
+      background-size: 8px 8px;
+    }
+    .knit-pattern-amber {
+      background: linear-gradient(135deg, #F39C12 25%, #E67E22 25%, #E67E22 50%, #F39C12 50%, #F39C12 75%, #E67E22 75%, #E67E22 100%);
+      background-size: 8px 8px;
+    }
+
+    /* Soft Circular Donut Gauge with knitted ring effect */
+    .donut-gauge {
+      background: conic-gradient(#569E3D 0% 69%, #E87A24 69% 88%, #D9453B 88% 90%, #F3A41D 90% 100%);
+    }
+
+    /* Smooth transition for plush buttons */
+    .btn-plush {
+      transition: all 0.15s ease-out;
+    }
+    .btn-plush:active {
+      transform: translateY(2px);
+      box-shadow: inset 0 2px 2px rgba(0,0,0,0.15), 0 1px 0 rgba(0,0,0,0.2) !important;
+    }
+  </style>
+<!-- END: Custom Cozy Styling -->
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-amber-200">
+<!-- BEGIN: MainHeader -->
+<header class="w-full bg-[#FFFDF9] border-b-2 border-dashed border-[#D5C2A5] shadow-sm relative z-20">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+<!-- Brand & Mascot Logo Area -->
+<div class="flex items-center gap-3.5" data-purpose="brand-container">
+<!-- Cow mascot in stitched circular patch -->
+<div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#FAF3E3] border-2 border-dashed border-[#C8B291] p-1 shadow-stitched-sm flex items-center justify-center overflow-hidden flex-shrink-0">
+<img alt="Wealth Roots Vaca Granja" class="w-full h-full object-cover rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKShW9omY98u5pWNR7uGqUL3AnBGuPukQ5N7XFNCUt6JCk9DuAqz8sxp1umzcDDRyvVxKXZwVEjVGdwCsse3f5oaJctS1qAdl9LCeZsmIAUm-ZmUMZ5yHXhUdXd9jveLLDZHZeczIilkvSbiv5dZ021emL0Qg9Biv92fz2oV87qZRVSBTe_ciWN2x52YzVUdyI0jS75aQaRLSFQJ2aV36PL9f_SQrKivTRvfRVtmIHm5d7CfKtc34">
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h1 class="text-2xl sm:text-3xl font-bold font-fredoka tracking-tight text-[#4A3525] leading-none">Wealth Roots</h1>
+<span class="text-xs bg-[#FAF0DC] text-[#7A5B35] font-semibold px-2 py-0.5 rounded-full border border-dashed border-[#C8B291]">v4.2</span>
+</div>
+<p class="text-xs sm:text-sm font-semibold text-[#8B6E52] mt-0.5 flex items-center gap-1.5">
+<span class="inline-block w-2 h-2 rounded-full bg-[#569E3D]"></span>
+            Panel de Padres • <span class="text-[#4A3525]">Granja de Mateo</span>
+</p>
+</div>
+</div>
+<!-- Header Action Elements & Stats -->
+<div class="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3" data-purpose="header-actions">
+<!-- Kid Coin Pill -->
+
+<!-- Back to Farm Button -->
+
+<!-- Fast Task Creation Button -->
+<button class="btn-plush text-xs sm:text-sm font-bold font-fredoka text-white bg-[#D9453B] hover:bg-[#C83A30] px-4 py-2 rounded-full shadow-plush-red border border-white/40 flex items-center gap-1.5 knit-pattern-red" onclick="switchTab('asignar')">
+<span class="text-base leading-none">＋</span>
+<span>Nueva Tarea Rápida</span>
+</button>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContentWrapper -->
+<main class="max-w-7xl mx-auto w-full px-4 sm:px-6 py-6 flex-1 flex flex-col gap-6">
+<!-- BEGIN: NavigationTabs -->
+<!-- Plush & Stitched 3-Tab Pill Switcher -->
+<nav aria-label="Navegación del Panel" class="flex justify-center">
+<div class="bg-[#EFE3CF] p-1.5 rounded-full border-2 border-dashed border-[#C8B291] shadow-stitched-sm inline-flex flex-wrap sm:flex-nowrap gap-1">
+<!-- Tab 1: Active Tareas Realizadas -->
+<button class="btn-plush px-5 py-2.5 rounded-full font-fredoka font-medium text-sm text-[#6B513C] hover:text-[#4A3525] hover:bg-[#FAF3E3] border border-transparent transition-all flex items-center gap-2" data-active="false" id="tab-btn-realizadas" onclick="switchTab('realizadas')">
+<span>📋</span>
+<span>Tareas Realizadas</span>
+<span class="bg-white text-[#D9453B] text-xs font-bold px-2 py-0.2 rounded-full shadow-sm" id="pending-badge-counter">3</span>
+</button>
+<!-- Tab 2: Asignar Tareas -->
+<button class="btn-plush px-5 py-2.5 rounded-full font-fredoka font-medium text-sm text-[#6B513C] hover:text-[#4A3525] hover:bg-[#FAF3E3] border border-transparent transition-all flex items-center gap-2" data-active="false" id="tab-btn-asignar" onclick="switchTab('asignar')">
+<span>✏️</span>
+<span>Asignar Tareas</span>
+</button>
+<!-- Tab 3: Progreso del Niño -->
+<button class="btn-plush px-5 py-2.5 rounded-full font-fredoka font-semibold text-sm transition-all flex items-center gap-2 shadow-plush-red knit-pattern-red text-white border border-white/30" data-active="true" id="tab-btn-progreso" onclick="switchTab('progreso')">
+<span>🌱</span>
+<span>Progreso del Niño</span>
+</button>
+</div>
+</nav>
+<!-- END: NavigationTabs -->
+<!-- BEGIN: View 1 - Tareas Realizadas (Clean & Focused View) -->
+<div class="flex-col gap-6 max-w-5xl mx-auto w-full hidden" id="view-realizadas">
+<!-- Section Header with badge -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 px-1">
+<div class="flex items-center gap-2.5">
+<h2 class="text-xl sm:text-2xl font-fredoka font-bold text-[#4A3525]">Tareas Pendientes de Validación</h2>
+<span class="text-xs bg-[#E57A28] text-white font-fredoka px-2.5 py-0.5 rounded-full shadow-sm" id="pending-header-pill">3 pendientes hoy</span>
+</div>
+<span class="text-xs text-[#8B6E52] font-semibold">Revisa la evidencia entregada y asigna las monedas a Mateo</span>
+</div>
+<!-- Task Cards Container -->
+<div class="flex flex-col gap-4">
+<!-- Task Item 1: Juguetes -->
+<article class="bg-[#FFFDF9] border-2 border-dashed border-[#C8B291] rounded-3xl p-4 sm:p-5 shadow-stitched transition-all hover:border-[#B29873] relative overflow-hidden" id="task-card-1">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+<div class="flex items-start gap-3.5">
+<!-- Embroidered Teddy Icon -->
+<div class="w-12 h-12 rounded-2xl bg-[#FDEFD0] border-2 border-dashed border-[#E5A53B] flex items-center justify-center text-2xl flex-shrink-0 shadow-sm">
+🧸
+</div>
+<div>
+<div class="flex items-center gap-2 flex-wrap">
+<h3 class="font-fredoka font-bold text-lg text-[#4A3525]">Limpiar los juguetes del cuarto</h3>
+<span class="bg-[#EBF5E5] text-[#4A8031] text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-dashed border-[#95CA7A]">Hogar &amp; Orden</span>
+</div>
+<div class="flex items-center gap-3 mt-1 text-xs text-[#7A624E] flex-wrap">
+<span class="flex items-center gap-1 font-semibold text-[#5B88B4]">
+📸 <span>Con foto de evidencia adjunta</span>
+</span>
+<span>•</span>
+<span>Marcada como hecha hoy a las 11:20 am</span>
+</div>
+</div>
+</div>
+<!-- Reward Coin Badge -->
+<div class="flex sm:flex-col items-center justify-between w-full sm:w-auto bg-[#FEF9EC] border-2 border-dashed border-[#F3A41D] px-3.5 py-1.5 rounded-2xl">
+<span class="text-xs font-semibold text-[#8C6420]">Recompensa</span>
+<div class="font-fredoka font-bold text-lg text-[#E68A00] flex items-center gap-1">
+<span>+10</span>
+<span class="text-xl">🪙</span>
+</div>
+</div>
+</div>
+<!-- Bottom Action Buttons -->
+<div class="mt-4 pt-3.5 border-t border-dashed border-[#E8DCBF] flex flex-wrap items-center justify-end gap-2.5">
+<button class="btn-plush text-xs font-bold text-[#6D4C32] bg-[#FAF3E3] hover:bg-[#F3E7D0] px-3.5 py-2 rounded-xl border border-dashed border-[#C4A882] shadow-sm flex items-center gap-1.5" onclick="openModal('Limpiar los juguetes del cuarto', 'Hogar &amp; Orden', 10, 'https://lh3.googleusercontent.com/aida-public/AB6AXuBcLpyZyv71ZiwEMvXRi7PlvAdtIuim86UX_WFN2ULGOXWJWmQ1cPaMr36CLVY0Mqz9uxqPw79kN_azmuZjR6QZfy_DXGa9U6nTZL9DEH38B9THu7TBf0X_nrH6aqTVMg4toL81wDfsw7gcCcJbNLQRVo4FWIPyIbGKgsDr03cgtcby4I-25Pid0vHKyN10JFvtAybU4liduQK7U7Cav5zEsjsxZA7QtohOqmjEcn4GlWamkT4gE6E', 'Mateo guardó todos los bloques de madera en la caja verde y ordenó los peluches.', 'task-card-1')">
+<span>🔍</span>
+<span>Revisar / Corregir</span>
+</button>
+<button class="btn-plush text-xs sm:text-sm font-fredoka font-semibold text-white bg-[#569E3D] hover:bg-[#498733] px-4 py-2 rounded-xl shadow-plush-green border border-white/30 flex items-center gap-1.5 knit-pattern-green" onclick="approveTask('task-card-1', 10)">
+<span>✅</span>
+<span>Aprobar y Entregar Monedas</span>
+</button>
+</div>
+</article>
+<!-- Task Item 2: Lectura Cuentos de la Selva -->
+<article class="bg-[#FFFDF9] border-2 border-dashed border-[#C8B291] rounded-3xl p-4 sm:p-5 shadow-stitched transition-all hover:border-[#B29873] relative overflow-hidden" id="task-card-2">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+<div class="flex items-start gap-3.5">
+<!-- Embroidered Book Icon -->
+<div class="w-12 h-12 rounded-2xl bg-[#E8F1FC] border-2 border-dashed border-[#7AAEE5] flex items-center justify-center text-2xl flex-shrink-0 shadow-sm">
+📚
+</div>
+<div>
+<div class="flex items-center gap-2 flex-wrap">
+<h3 class="font-fredoka font-bold text-lg text-[#4A3525]">Lectura de 20 minutos ("Cuentos de la Selva")</h3>
+<span class="bg-[#E7F2FA] text-[#3472A8] text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-dashed border-[#95BDE4]">Estudio &amp; Comprensión</span>
+</div>
+<div class="flex items-center gap-3 mt-1 text-xs text-[#7A624E] flex-wrap">
+<span class="flex items-center gap-1 font-semibold text-[#668B44]">
+📖 <span>Capítulo 3 completado y grabado</span>
+</span>
+<span>•</span>
+<span>Marcada como hecha hoy a las 10:05 am</span>
+</div>
+</div>
+</div>
+<!-- Reward Coin Badge -->
+<div class="flex sm:flex-col items-center justify-between w-full sm:w-auto bg-[#FEF9EC] border-2 border-dashed border-[#F3A41D] px-3.5 py-1.5 rounded-2xl">
+<span class="text-xs font-semibold text-[#8C6420]">Recompensa</span>
+<div class="font-fredoka font-bold text-lg text-[#E68A00] flex items-center gap-1">
+<span>+15</span>
+<span class="text-xl">🪙</span>
+</div>
+</div>
+</div>
+<!-- Bottom Action Buttons -->
+<div class="mt-4 pt-3.5 border-t border-dashed border-[#E8DCBF] flex flex-wrap items-center justify-end gap-2.5">
+<button class="btn-plush text-xs font-bold text-[#6D4C32] bg-[#FAF3E3] hover:bg-[#F3E7D0] px-3.5 py-2 rounded-xl border border-dashed border-[#C4A882] shadow-sm flex items-center gap-1.5" onclick="openModal('Lectura de 20 minutos (\'Cuentos de la Selva\')', 'Estudio &amp; Comprensión', 15, null, 'Audio grabado de 1 minuto leyendo con entonación el párrafo donde el Coatí ayuda a sus hermanitos.', 'task-card-2')">
+<span>🔍</span>
+<span>Revisar / Corregir</span>
+</button>
+<button class="btn-plush text-xs sm:text-sm font-fredoka font-semibold text-white bg-[#569E3D] hover:bg-[#498733] px-4 py-2 rounded-xl shadow-plush-green border border-white/30 flex items-center gap-1.5 knit-pattern-green" onclick="approveTask('task-card-2', 15)">
+<span>✅</span>
+<span>Aprobar y Entregar Monedas</span>
+</button>
+</div>
+</article>
+<!-- Task Item 3: Matemáticas Pollitos -->
+<article class="bg-[#FFFDF9] border-2 border-dashed border-[#C8B291] rounded-3xl p-4 sm:p-5 shadow-stitched transition-all hover:border-[#B29873] relative overflow-hidden" id="task-card-3">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+<div class="flex items-start gap-3.5">
+<!-- Embroidered Chickens Icon -->
+<div class="w-12 h-12 rounded-2xl bg-[#FFF1D8] border-2 border-dashed border-[#F39C12] flex items-center justify-center text-2xl flex-shrink-0 shadow-sm">
+🐣
+</div>
+<div>
+<div class="flex items-center gap-2 flex-wrap">
+<h3 class="font-fredoka font-bold text-lg text-[#4A3525]">Matemáticas Visuales: 10 + 3 Pollitos</h3>
+<span class="bg-[#FFF4E0] text-[#B06D12] text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-dashed border-[#E9BA6B]">Estudio &amp; Números</span>
+</div>
+<div class="flex items-center gap-3 mt-1 text-xs text-[#7A624E] flex-wrap">
+<span class="flex items-center gap-1 font-semibold text-[#8C6B3E]">
+🧮 <span>Resultado ingresado: 13 pollitos</span>
+</span>
+<span>•</span>
+<span>Marcada como hecha hoy a las 8:45 am</span>
+</div>
+</div>
+</div>
+<!-- Reward Coin Badge -->
+<div class="flex sm:flex-col items-center justify-between w-full sm:w-auto bg-[#FEF9EC] border-2 border-dashed border-[#F3A41D] px-3.5 py-1.5 rounded-2xl">
+<span class="text-xs font-semibold text-[#8C6420]">Recompensa</span>
+<div class="font-fredoka font-bold text-lg text-[#E68A00] flex items-center gap-1">
+<span>+10</span>
+<span class="text-xl">🪙</span>
+</div>
+</div>
+</div>
+<!-- Bottom Action Buttons -->
+<div class="mt-4 pt-3.5 border-t border-dashed border-[#E8DCBF] flex flex-wrap items-center justify-end gap-2.5">
+<button class="btn-plush text-xs font-bold text-[#6D4C32] bg-[#FAF3E3] hover:bg-[#F3E7D0] px-3.5 py-2 rounded-xl border border-dashed border-[#C4A882] shadow-sm flex items-center gap-1.5" onclick="openModal('Matemáticas Visuales: 10 + 3 Pollitos', 'Estudio &amp; Números', 10, null, 'Respuesta correcta ingresada: 10 pollitos amarillos + 3 pollitos naranjas = 13 pollitos contados en pantalla.', 'task-card-3')">
+<span>🔍</span>
+<span>Revisar / Corregir</span>
+</button>
+<button class="btn-plush text-xs sm:text-sm font-fredoka font-semibold text-white bg-[#569E3D] hover:bg-[#498733] px-4 py-2 rounded-xl shadow-plush-green border border-white/30 flex items-center gap-1.5 knit-pattern-green" onclick="approveTask('task-card-3', 10)">
+<span>✅</span>
+<span>Aprobar y Entregar Monedas</span>
+</button>
+</div>
+</article>
+</div>
+<!-- Paired Stitched Teaser Card: ¿Quieres asignarle un nuevo reto? -->
+<section class="bg-gradient-to-r from-[#FEF9EE] via-[#FFFDF9] to-[#F7EBD3] border-2 border-dashed border-[#D4BC98] rounded-3xl p-6 shadow-stitched flex flex-col md:flex-row items-center justify-between gap-5">
+<div class="flex items-center gap-4 text-center md:text-left">
+<div class="w-14 h-14 rounded-2xl bg-[#FFF1D8] border-2 border-dashed border-[#E5A53B] flex items-center justify-center text-3xl flex-shrink-0 shadow-sm mx-auto md:mx-0">
+✨
+</div>
+<div>
+<h4 class="font-fredoka font-bold text-lg sm:text-xl text-[#4A3525]">¿Quieres asignarle un nuevo reto?</h4>
+<p class="text-xs sm:text-sm text-[#7B614B] mt-0.5">Crea misiones divertidas con fotos de orden, sumas de animalitos o cuentos con preguntas adaptadas.</p>
+</div>
+</div>
+<button class="btn-plush font-fredoka font-bold text-xs sm:text-sm text-[#4A3525] bg-[#FFFDF9] hover:bg-white border-2 border-dashed border-[#C8B291] px-6 py-3 rounded-2xl shadow-stitched-sm flex items-center justify-center gap-2 flex-shrink-0" onclick="switchTab('asignar')">
+<span>✏️</span>
+<span>Asignar Nuevas Tareas Ahora</span>
+</button>
+</section>
+</div>
+<!-- END: View 1 -->
+<!-- BEGIN: View 2 - Asignar Tareas (Interactive Dynamic Builders) -->
+<div class="bg-[#FFFDF9] border-2 border-dashed border-[#C8B291] rounded-3xl p-6 sm:p-8 shadow-stitched max-w-4xl mx-auto w-full hidden" id="view-asignar">
+<div class="flex items-center gap-3 pb-5 border-b-2 border-dashed border-[#EADFCD]">
+<div class="w-12 h-12 rounded-2xl bg-[#FDEFD0] border-2 border-dashed border-[#E5A53B] flex items-center justify-center text-2xl flex-shrink-0">
+✏️
+</div>
+<div>
+<h2 class="text-2xl font-bold font-fredoka text-[#4A3525]">Asignar Nuevas Misiones a Mateo</h2>
+<p class="text-xs sm:text-sm text-[#8B6E52]">Personaliza las tareas del hogar, matemáticas con animalitos o cuentos interactivos.</p>
+</div>
+</div>
+<!-- Category Sub-navigation Pills -->
+<div class="mt-6 flex flex-wrap gap-2.5 justify-center sm:justify-start" id="builder-category-tabs">
+<button class="btn-plush px-4 py-2 rounded-full font-fredoka font-semibold text-xs sm:text-sm transition-all border border-white/40 shadow-plush-red knit-pattern-red text-white flex items-center gap-1.5" id="cat-btn-hogar" onclick="switchAssignCategory('hogar')">
+<span>🧹</span>
+<span>Tareas del Hogar</span>
+</button>
+<button class="btn-plush px-4 py-2 rounded-full font-fredoka font-medium text-xs sm:text-sm text-[#6B513C] hover:text-[#4A3525] bg-[#FAF3E3] hover:bg-[#F3E7D0] border-2 border-dashed border-[#C8B291] transition-all flex items-center gap-1.5" id="cat-btn-math" onclick="switchAssignCategory('math')">
+<span>🔢</span>
+<span>Matemáticas Divertidas</span>
+</button>
+<button class="btn-plush px-4 py-2 rounded-full font-fredoka font-medium text-xs sm:text-sm text-[#6B513C] hover:text-[#4A3525] bg-[#FAF3E3] hover:bg-[#F3E7D0] border-2 border-dashed border-[#C8B291] transition-all flex items-center gap-1.5" id="cat-btn-reading" onclick="switchAssignCategory('reading')">
+<span>📖</span>
+<span>Lectura &amp; Comprensión</span>
+</button>
+</div>
+<form class="mt-6 flex flex-col gap-6" onsubmit="handleCreateTask(event)">
+<!-- Category 1: Tareas del Hogar -->
+<div class="flex-col gap-4 flex" id="cat-section-hogar">
+<div>
+<label class="block text-xs font-bold text-[#5C432F] uppercase tracking-wider mb-1.5" for="hogar-title">Misión o Deber del Hogar</label>
+<input class="w-full bg-[#FAF3E3] border-2 border-dashed border-[#C8B291] rounded-2xl px-4 py-2.5 text-[#4A3525] font-medium focus:ring-0 focus:border-[#569E3D] transition text-sm" id="hogar-title" placeholder="Ej: Guardar los juguetes, tender la cama, alimentar a los pollitos..." type="text" value="Regar las plantitas de la huerta">
+</div>
+<div>
+<label class="block text-xs font-bold text-[#5C432F] uppercase tracking-wider mb-1.5" for="hogar-notes">Instrucciones o Detalles Cariñosos</label>
+<textarea class="w-full bg-[#FAF3E3] border-2 border-dashed border-[#C8B291] rounded-2xl px-4 py-2.5 text-[#4A3525] font-medium focus:ring-0 focus:border-[#569E3D] transition text-sm" id="hogar-notes" placeholder="Explica cómo debe quedar la tarea..." rows="2">Usa la regadera verde pequeña con agua fresca y no olvides avisarle a mamá cuando termines.</textarea>
+</div>
+<div>
+<span class="block text-xs font-bold text-[#5C432F] uppercase tracking-wider mb-2">Comprobación requerida</span>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+<label class="flex items-center gap-2 p-2.5 bg-[#FAF3E3] border border-dashed border-[#C8B291] rounded-2xl cursor-pointer hover:bg-[#F3E8D2] text-xs font-bold text-[#4A3525]">
+<input checked="" class="text-[#569E3D] focus:ring-0" name="hogar-evidence" type="radio">
+<span>📸 Foto con la regadera</span>
+</label>
+<label class="flex items-center gap-2 p-2.5 bg-[#FAF3E3] border border-dashed border-[#C8B291] rounded-2xl cursor-pointer hover:bg-[#F3E8D2] text-xs font-bold text-[#4A3525]">
+<input class="text-[#569E3D] focus:ring-0" name="hogar-evidence" type="radio">
+<span>🤝 Confirmación de papá/mamá</span>
+</label>
+<label class="flex items-center gap-2 p-2.5 bg-[#FAF3E3] border border-dashed border-[#C8B291] rounded-2xl cursor-pointer hover:bg-[#F3E8D2] text-xs font-bold text-[#4A3525]">
+<input class="text-[#569E3D] focus:ring-0" name="hogar-evidence" type="radio">
+<span>⭐ Auto-reporte de Mateo</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Category 2: Matemáticas Divertidas -->
+<div class="flex-col gap-5 hidden" id="cat-section-math">
+<!-- Operation selector -->
+<div>
+<span class="block text-xs font-bold text-[#5C432F] uppercase tracking-wider mb-2">1. Selecciona la Operación</span>
+<div class="flex flex-wrap gap-2" id="math-operations">
+<button class="btn-plush px-4 py-1.5 rounded-2xl font-fredoka font-bold text-xs border border-white/30 text-white shadow-plush-red knit-pattern-red" data-op="+" onclick="setMathOperation('+', event)" type="button">＋ Suma</button>
+<button class="btn-plush px-4 py-1.5 rounded-2xl font-fredoka font-semibold text-xs border-2 border-dashed border-[#C8B291] bg-[#FAF3E3] text-[#5C422D]" data-op="-" onclick="setMathOperation('-', event)" type="button">− Resta</button>
+<button class="btn-plush px-4 py-1.5 rounded-2xl font-fredoka font-semibold text-xs border-2 border-dashed border-[#C8B291] bg-[#FAF3E3] text-[#5C422D]" data-op="×" onclick="setMathOperation('×', event)" type="button">× Multiplicar</button>
+<button class="btn-plush px-4 py-1.5 rounded-2xl font-fredoka font-semibold text-xs border-2 border-dashed border-[#C8B291] bg-[#FAF3E3] text-[#5C422D]" data-op="÷" onclick="setMathOperation('÷', event)" type="button">÷ Dividir</button>
+</div>
+</div>
+<!-- Farm Item & Quantities -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<div>
+<label class="block text-xs font-bold text-[#5C432F] uppercase tracking-wider mb-1.5" for="math-item-select">2. Elemento Granjero</label>
+<select class="w-full bg-[#FAF3E3] border-2 border-dashed border-[#C8B291] rounded-2xl px-3 py-2 text-sm text-[#4A3525] font-semibold focus:ring-0 focus:border-[#569E3D]" id="math-item-select" onchange="updateMathPreview()">
+<option value="🍎|Manzanas">🍎 Manzanas</option>
+<option value="🥕|Zanahorias">🥕 Zanahorias</option>
+<option selected="" value="🐥|Pollitos">🐥 Pollitos</option>
+<option value="🥛|Vasos de leche">🥛 Vasos de leche</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-bold text-[#5C432F] uppercase tracking-wider mb-1.5" for="math-qty-1">Primer Número</label>
+<input class="w-full bg-[#FAF3E3] border-2 border-dashed border-[#C8B291] rounded-2xl px-3 py-2 text-sm text-[#4A3525] font-fredoka font-bold focus:ring-0 focus:border-[#569E3D]" id="math-qty-1" max="15" min="1" oninput="updateMathPreview()" type="number" value="2">
+</div>
+<div>
+<label class="block text-xs font-bold text-[#5C432F] uppercase tracking-wider mb-1.5" for="math-qty-2">Segundo Número</label>
+<input class="w-full bg-[#FAF3E3] border-2 border-dashed border-[#C8B291] rounded-2xl px-3 py-2 text-sm text-[#4A3525] font-fredoka font-bold focus:ring-0 focus:border-[#569E3D]" id="math-qty-2" max="15" min="1" oninput="updateMathPreview()" type="number" value="2">
+</div>
+</div>
+<!-- Live Visual Preview Box in dashed stitched card -->
+<div class="bg-[#FFF8EA] border-2 border-dashed border-[#E3B755] rounded-3xl p-4 sm:p-5 shadow-stitched-sm">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold font-fredoka text-[#946419] uppercase tracking-wider flex items-center gap-1.5">
+<span>👀</span> Vista previa en vivo para Mateo
+</span>
+<span class="text-[11px] font-semibold text-[#8C6420] bg-white px-2 py-0.5 rounded-full border border-dashed border-[#DEB04D]" id="math-preview-label">2 🐥 + 2 🐥 = ?</span>
+</div>
+<div class="bg-[#FFFDF9] border border-dashed border-[#C8B291] rounded-2xl p-4 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xl sm:text-2xl font-fredoka">
+<div class="flex items-center gap-1 p-2 bg-[#FAF3E3] rounded-xl border border-dashed border-[#DFCCAE]" id="math-visual-group1"><span>🐥</span><span>🐥</span></div>
+<span class="text-2xl font-bold text-[#D9453B]" id="math-preview-operator">＋</span>
+<div class="flex items-center gap-1 p-2 bg-[#FAF3E3] rounded-xl border border-dashed border-[#DFCCAE]" id="math-visual-group2"><span>🐥</span><span>🐥</span></div>
+<span class="text-2xl font-bold text-[#5C432F]">＝</span>
+<div class="flex items-center gap-1.5 bg-[#FAF3E3] border-2 border-dashed border-[#569E3D] px-3 py-1.5 rounded-xl shadow-inner">
+<input class="w-14 text-center font-fredoka font-bold text-lg bg-white border border-dashed border-[#95CA7A] rounded-lg py-1 text-[#2E6B1B] focus:ring-0" disabled="" placeholder="?" type="text">
+<span class="text-xs font-fredoka text-[#569E3D]" id="math-preview-unit">Pollitos</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Category 3: Lectura & Comprensión -->
+<div class="flex-col gap-4 hidden" id="cat-section-reading">
+<div class="bg-[#F8F4ED] border-2 border-dashed border-[#C8B291] rounded-3xl p-4 sm:p-5 shadow-stitched-sm">
+<div class="flex items-center justify-between mb-2.5">
+<div class="flex items-center gap-2">
+<span class="text-lg">✨</span>
+<h4 class="font-fredoka font-bold text-sm text-[#4A3525]">Mini Historia de la Granja Generada por IA</h4>
+</div>
+<button class="btn-plush text-xs font-fredoka font-semibold text-[#4A3525] bg-[#FFFDF9] hover:bg-white border border-dashed border-[#C8B291] px-3 py-1.5 rounded-full shadow-sm flex items-center gap-1" onclick="generateNewStory()" type="button">
+<span>🔄</span>
+<span>Generar Nueva Historia</span>
+</button>
+</div>
+<div class="bg-[#FFFDF9] border border-dashed border-[#D2BF9F] rounded-2xl p-4 text-xs sm:text-sm text-[#4A3525] leading-relaxed italic" id="reading-story-box">
+"La granjerita Sofía salió muy temprano al corral porque escuchó a su ovejita blanca balar buscando su desayuno. Al llegar, descubrió que las manzanas caídas del árbol formaban un caminito dulce directo hacia el estanque de los patos."
+</div>
+</div>
+<!-- Comprehension Question Display & Answer Box -->
+<div class="bg-[#FFFDF9] border-2 border-dashed border-[#C8B291] rounded-2xl p-4">
+<label class="block text-xs font-bold text-[#5C432F] uppercase tracking-wider mb-1.5" for="reading-question">Pregunta de Comprensión para Mateo</label>
+<input class="w-full bg-[#FAF3E3] border border-dashed border-[#C8B291] rounded-xl px-3 py-2 text-xs sm:text-sm text-[#4A3525] font-semibold focus:ring-0 focus:border-[#569E3D]" id="reading-question" type="text" value="¿Por qué salió la granjerita Sofía muy temprano al corral?">
+<div class="mt-3">
+<span class="block text-[11px] font-bold text-[#8C6D46] uppercase tracking-wider mb-1">Simulación del campo de respuesta de Mateo:</span>
+<input class="w-full bg-white border-2 border-dashed border-[#7AAEE5] rounded-xl px-3 py-2 text-xs text-[#6B513C] italic" disabled="" placeholder="Mateo escribirá o grabará audio respondiendo: 'Porque escuchó a su ovejita balar'..." type="text">
+</div>
+</div>
+</div>
+<!-- Bottom Controls: Coin Reward Selector Pills & Submit -->
+<div class="border-t-2 border-dashed border-[#EADFCD] pt-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+<!-- Coins Pills Selector -->
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-[#5C432F] uppercase tracking-wider">Recompensa:</span>
+<div class="flex items-center gap-1.5" id="reward-pills">
+<button class="btn-plush px-3 py-1.5 rounded-full font-fredoka font-semibold text-xs border border-dashed border-[#C8B291] bg-[#FAF3E3] text-[#5C422D]" onclick="selectReward(5, this)" type="button">＋5 🪙</button>
+<button class="btn-plush px-3 py-1.5 rounded-full font-fredoka font-bold text-xs border border-white/40 text-white shadow-plush-gold knit-pattern-amber" onclick="selectReward(10, this)" type="button">＋10 🪙</button>
+<button class="btn-plush px-3 py-1.5 rounded-full font-fredoka font-semibold text-xs border border-dashed border-[#C8B291] bg-[#FAF3E3] text-[#5C422D]" onclick="selectReward(15, this)" type="button">＋15 🪙</button>
+<button class="btn-plush px-3 py-1.5 rounded-full font-fredoka font-semibold text-xs border border-dashed border-[#C8B291] bg-[#FAF3E3] text-[#5C422D]" onclick="selectReward(20, this)" type="button">＋20 🪙</button>
+</div>
+</div>
+<!-- Submit Big Plush Green Button -->
+<div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+<button class="btn-plush text-xs sm:text-sm font-semibold text-[#6D4C32] px-4 py-2.5 rounded-full border border-dashed border-[#C4A882] bg-[#FAF3E3]" onclick="switchTab('realizadas')" type="button">
+Cancelar
+</button>
+<button class="btn-plush font-fredoka font-semibold text-white bg-[#569E3D] hover:bg-[#488733] px-6 py-2.5 rounded-full shadow-plush-green border border-white/40 knit-pattern-green flex items-center gap-2" type="submit">
+<span>➕</span>
+<span>Publicar Tarea en su Granja</span>
+</button>
+</div>
+</div>
+</form>
+</div>
+<!-- END: View 2 -->
+<!-- BEGIN: View 3 - Progreso del Niño (Stats, Donut Chart & Farm Economy) -->
+<div class="flex-col gap-6 max-w-5xl mx-auto w-full flex" id="view-progreso">
+<!-- Top banner for Child Progress Summary -->
+<section class="bg-[#FFFDF9] border-2 border-dashed border-[#C8B291] rounded-3xl p-5 sm:p-6 shadow-stitched flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-[#FAF0DC] border-2 border-dashed border-[#C8B291] p-1.5 shadow-sm flex-shrink-0">
+<img alt="Mateo Avatar" class="w-full h-full object-cover rounded-2xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKShW9omY98u5pWNR7uGqUL3AnBGuPukQ5N7XFNCUt6JCk9DuAqz8sxp1umzcDDRyvVxKXZwVEjVGdwCsse3f5oaJctS1qAdl9LCeZsmIAUm-ZmUMZ5yHXhUdXd9jveLLDZHZeczIilkvSbiv5dZ021emL0Qg9Biv92fz2oV87qZRVSBTe_ciWN2x52YzVUdyI0jS75aQaRLSFQJ2aV36PL9f_SQrKivTRvfRVtmIHm5d7CfKtc34">
+</div>
+<div>
+<span class="text-xs font-bold text-[#8C6D46] bg-[#F7EBD3] px-2.5 py-0.5 rounded-full border border-dashed border-[#D2BA99]">Resumen Trimestral de Progreso</span>
+<h2 class="text-2xl font-bold font-fredoka text-[#4A3525] mt-1">Evolución y Hábitos de Mateo</h2>
+<p class="text-xs sm:text-sm text-[#7A624E]">Ha adquirido 4 nuevos hábitos de ahorro y disciplina escolar en los últimos 30 días.</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="text-center px-4 py-2 bg-[#FFF8EA] rounded-2xl border border-dashed border-[#E3B755]">
+<span class="block text-2xl font-fredoka font-bold text-[#E68A00]">94%</span>
+<span class="text-[11px] font-semibold text-[#8C6420]">Cumplimiento</span>
+</div>
+<div class="text-center px-4 py-2 bg-[#F1F8EC] rounded-2xl border border-dashed border-[#7EBF5E]">
+<span class="block text-2xl font-fredoka font-bold text-[#569E3D]">14</span>
+<span class="text-[11px] font-semibold text-[#487834]">Días de Racha</span>
+</div>
+</div>
+</section><section class="bg-gradient-to-r from-[#FEF9EE] via-[#FFFDF9] to-[#F7EBD3] border-2 border-dashed border-[#DEB04D] rounded-3xl p-5 sm:p-6 shadow-stitched flex flex-col lg:flex-row items-stretch justify-between gap-6 relative overflow-hidden" id="boveda-mateo-card"><div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 flex-1"><div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-[#FDEFD0] border-2 border-dashed border-[#E5A53B] p-2 flex items-center justify-center text-3xl sm:text-4xl shadow-sm flex-shrink-0">🪙</div><div><div class="flex items-center gap-2 flex-wrap"><span class="text-xs font-bold text-[#8C6420] bg-[#FFF8EA] px-2.5 py-0.5 rounded-full border border-dashed border-[#E5A53B]">Alcancía Activa</span><span class="bg-[#EBF5E5] text-[#4A8031] text-xs font-bold px-2 py-0.5 rounded-full border border-dashed border-[#95CA7A]">Nivel de Ahorro A+</span></div><h3 class="text-2xl sm:text-3xl font-bold font-fredoka text-[#4A3525] mt-1.5 flex items-baseline gap-2"><span id="header-user-coins">30 Monedas</span><span class="text-sm sm:text-base font-semibold text-[#8B6E52]">ahorradas en total</span></h3><p class="text-xs sm:text-sm text-[#7A624E] mt-0.5">Mateo guarda sus recompensas para desbloquear expansiones especiales en su granja.</p></div></div><div class="grid grid-cols-1 sm:grid-cols-3 gap-3 flex-shrink-0 lg:w-auto w-full"><div class="bg-[#FFFDF9] border border-dashed border-[#E3B755] rounded-2xl p-3 flex flex-col justify-center items-center text-center shadow-sm"><span class="text-[11px] font-bold text-[#8C6420] uppercase tracking-wider">Ganadas esta semana</span><span class="font-fredoka font-bold text-lg text-[#569E3D] mt-0.5">+35 🪙</span></div><div class="bg-[#FFFDF9] border border-dashed border-[#E3B755] rounded-2xl p-3 flex flex-col justify-center items-center text-center shadow-sm"><span class="text-[11px] font-bold text-[#8C6420] uppercase tracking-wider">Gastadas en la granja</span><span class="font-fredoka font-bold text-lg text-[#D9453B] mt-0.5">-20 🪙</span></div><div class="bg-[#FFFDF9] border border-dashed border-[#E3B755] rounded-2xl p-3 flex flex-col justify-center items-center text-center shadow-sm"><span class="text-[11px] font-bold text-[#8C6420] uppercase tracking-wider">Tasa de Ahorro</span><span class="font-fredoka font-bold text-lg text-[#E68A00] mt-0.5">60%</span></div></div></section>
+<!-- Two Primary Cards: Granja de Mateo & Resumen del Sprint -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+<!-- Card 1: Kid Farm Status Card -->
+<section class="bg-[#FFFDF9] border-2 border-dashed border-[#C8B291] rounded-3xl p-5 sm:p-6 shadow-stitched flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-3 pb-3 border-b border-dashed border-[#E8DCBF]">
+<div class="w-14 h-14 rounded-2xl bg-[#FFF5E0] border-2 border-dashed border-[#D8A748] p-1 flex-shrink-0 shadow-sm">
+<img alt="Granja Mateo" class="w-full h-full object-cover rounded-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKShW9omY98u5pWNR7uGqUL3AnBGuPukQ5N7XFNCUt6JCk9DuAqz8sxp1umzcDDRyvVxKXZwVEjVGdwCsse3f5oaJctS1qAdl9LCeZsmIAUm-ZmUMZ5yHXhUdXd9jveLLDZHZeczIilkvSbiv5dZ021emL0Qg9Biv92fz2oV87qZRVSBTe_ciWN2x52YzVUdyI0jS75aQaRLSFQJ2aV36PL9f_SQrKivTRvfRVtmIHm5d7CfKtc34">
+</div>
+<div>
+<h3 class="font-fredoka font-bold text-lg text-[#4A3525] leading-snug">Granja de Mateo 😊</h3>
+<p class="text-xs text-[#88694C]">Nivel 3 • Pequeño Granjero</p>
+</div>
+</div>
+<div class="mt-5 flex flex-col gap-3 text-sm font-semibold"><div class="bg-[#FAF3E3] border border-dashed border-[#C8B291] p-3 rounded-2xl flex items-center justify-between shadow-stitched-sm"><span class="flex items-center gap-2 text-[#5C432F]"><span class="text-lg">🐾</span><span class="font-fredoka text-sm">Animalitos comprados:</span></span><span class="font-bold text-[#569E3D] bg-white px-3 py-1 rounded-full border border-dashed border-[#B8D8A2] text-xs font-fredoka">3 animales</span></div><div class="bg-[#FAF3E3] border border-dashed border-[#C8B291] p-3 rounded-2xl flex items-center justify-between shadow-stitched-sm"><span class="flex items-center gap-2 text-[#5C432F]"><span class="text-lg">🔥</span><span class="font-fredoka text-sm">Racha de responsabilidad:</span></span><span class="font-bold text-[#D9453B] bg-white px-3 py-1 rounded-full border border-dashed border-[#F3B3AE] text-xs font-fredoka">5 días seguidos</span></div><div class="bg-[#FAF3E3] border border-dashed border-[#C8B291] p-3 rounded-2xl flex items-center justify-between shadow-stitched-sm"><span class="flex items-center gap-2 text-[#5C432F]"><span class="text-lg">🌱</span><span class="font-fredoka text-sm">Estado de ánimo:</span></span><span class="font-bold text-[#2A7B9B] bg-white px-3 py-1 rounded-full border border-dashed border-[#A7D1DF] text-xs font-fredoka">¡Muy Feliz!</span></div></div>
+</div>
+<!-- Savings target inside Mateo Farm -->
+<div class="mt-5 pt-3.5 border-t border-dashed border-[#E8DCBF]"><div class="flex items-center justify-between text-xs sm:text-sm mb-2"><span class="font-bold text-[#4A3525] flex items-center gap-1.5">🎯 <span>Meta actual: Corral para Patitos</span></span><span class="font-fredoka font-bold text-[#D97706] text-sm">25 / 50 🪙</span></div><div class="w-full bg-[#FAF3E3] h-3.5 rounded-full overflow-hidden border border-dashed border-[#C8B291] p-0.5"><div class="bg-[#F3A41D] h-full rounded-full" style="width: 50%"></div></div></div>
+</section>
+<!-- Card 2: Resumen del Sprint (Donut Gauge & Legends) -->
+<section class="bg-[#FFFDF9] border-2 border-dashed border-[#C8B291] rounded-3xl p-5 sm:p-6 shadow-stitched flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-fredoka font-bold text-lg text-[#4A3525]">Resumen del Sprint</h3>
+<span class="text-xs font-semibold text-[#8B6E52] bg-[#F5ECDB] px-2.5 py-0.5 rounded-md border border-dashed border-[#C8B291]">Mayo 2026</span>
+</div>
+<!-- Donut gauge and legend container -->
+<div class="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 my-5 p-2"><div class="relative w-44 h-44 rounded-full p-3.5 donut-gauge shadow-stitched flex items-center justify-center flex-shrink-0"><div class="w-full h-full bg-[#FFFDF9] rounded-full flex flex-col items-center justify-center border-2 border-dashed border-[#C8B291] shadow-inner"><span class="text-4xl font-bold font-fredoka text-[#4A3525] leading-none">69%</span><span class="text-xs font-semibold text-[#7A624E] mt-1">completado</span></div></div><div class="flex flex-col gap-2.5 text-sm w-full sm:w-auto flex-1 max-w-xs"><div class="flex items-center justify-between p-2 rounded-xl bg-[#FAF3E3] border border-dashed border-[#C8B291]"><div class="flex items-center gap-2.5"><span class="w-3 h-3 rounded-full bg-[#569E3D] shadow-sm"></span><span class="text-[#7A624E] font-medium">Completadas:</span></div><span class="font-bold font-fredoka text-[#4A3525] text-base">129</span></div><div class="flex items-center justify-between p-2 rounded-xl bg-[#FAF3E3] border border-dashed border-[#C8B291]"><div class="flex items-center gap-2.5"><span class="w-3 h-3 rounded-full bg-[#E87A24] shadow-sm"></span><span class="text-[#7A624E] font-medium">En Progreso:</span></div><span class="font-bold font-fredoka text-[#4A3525] text-base">43</span></div><div class="flex items-center justify-between p-2 rounded-xl bg-[#FAF3E3] border border-dashed border-[#C8B291]"><div class="flex items-center gap-2.5"><span class="w-3 h-3 rounded-full bg-[#D9453B] shadow-sm"></span><span class="text-[#7A624E] font-medium">Pendientes:</span></div><span class="font-bold font-fredoka text-[#4A3525] text-base">3</span></div><div class="flex items-center justify-between p-2 rounded-xl bg-[#F5ECDB] border border-dashed border-[#D5C2A5] mt-0.5"><div class="flex items-center gap-2.5"><span class="w-3 h-3 rounded-full bg-[#8E7259] shadow-sm"></span><span class="text-[#5C422D] font-bold">Total ciclo:</span></div><span class="font-bold font-fredoka text-[#4A3525] text-base">187</span></div></div></div>
+</div>
+<p class="text-xs text-[#8B6E52] text-center italic mt-2 bg-[#FAF3E3] p-2.5 rounded-2xl border border-dashed border-[#E3D4BC]">
+"¡Mateo está muy entusiasmado por desbloquear la ovejita blanca!"
+</p>
+</section>
+</div>
+<!-- Card 3: Historial de Compras en la Granja (Farm Economy) -->
+<section class="bg-[#FFFDF9] border-2 border-dashed border-[#C8B291] rounded-3xl p-5 sm:p-6 shadow-stitched">
+<div class="flex items-center justify-between pb-3 border-b-2 border-dashed border-[#EADFCD] mb-4">
+<div class="flex items-center gap-2.5">
+<span class="text-2xl">🛒</span>
+<h3 class="font-fredoka font-bold text-lg text-[#4A3525]">Historial de Compras en la Granja</h3>
+</div>
+<span class="text-xs font-semibold text-[#8C6420] bg-[#FFF8EA] px-3 py-1 rounded-full border border-dashed border-[#E3B755]">
+Monedas gastadas por Mateo en su granjita
+</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+<!-- Purchase 1 -->
+<div class="bg-[#FAF3E3] border-2 border-dashed border-[#C8B291] rounded-2xl p-3.5 flex items-center justify-between shadow-stitched-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-white border border-dashed border-[#C8B291] flex items-center justify-center text-xl flex-shrink-0">
+🐑
+</div>
+<div>
+<h4 class="font-fredoka font-bold text-sm text-[#4A3525]">Ovejita Blanca</h4>
+<span class="text-[11px] text-[#7A624E]">Comprada ayer</span>
+</div>
+</div>
+<div class="bg-[#FEF9EC] border border-dashed border-[#F3A41D] px-2.5 py-1 rounded-xl text-center">
+<span class="font-fredoka font-bold text-xs text-[#D97706]">-20 🪙</span>
+</div>
+</div>
+<!-- Purchase 2 -->
+<div class="bg-[#FAF3E3] border-2 border-dashed border-[#C8B291] rounded-2xl p-3.5 flex items-center justify-between shadow-stitched-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-white border border-dashed border-[#C8B291] flex items-center justify-center text-xl flex-shrink-0">
+🥕
+</div>
+<div>
+<h4 class="font-fredoka font-bold text-sm text-[#4A3525]">Semillas Zanahoria</h4>
+<span class="text-[11px] text-[#7A624E]">Comprada hace 3 días</span>
+</div>
+</div>
+<div class="bg-[#FEF9EC] border border-dashed border-[#F3A41D] px-2.5 py-1 rounded-xl text-center">
+<span class="font-fredoka font-bold text-xs text-[#D97706]">-10 🪙</span>
+</div>
+</div>
+<!-- Purchase 3 -->
+<div class="bg-[#FAF3E3] border-2 border-dashed border-[#C8B291] rounded-2xl p-3.5 flex items-center justify-between shadow-stitched-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-white border border-dashed border-[#C8B291] flex items-center justify-center text-xl flex-shrink-0">
+🏠
+</div>
+<div>
+<h4 class="font-fredoka font-bold text-sm text-[#4A3525]">Techo para Granero</h4>
+<span class="text-[11px] text-[#7A624E]">Comprado hace 1 sem</span>
+</div>
+</div>
+<div class="bg-[#FEF9EC] border border-dashed border-[#F3A41D] px-2.5 py-1 rounded-xl text-center">
+<span class="font-fredoka font-bold text-xs text-[#D97706]">-15 🪙</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- END: View 3 -->
+</main>
+<!-- END: MainContentWrapper -->
+<!-- BEGIN: CozyFooter -->
+<footer class="mt-8 border-t-2 border-dashed border-[#D5C2A5] bg-[#FAF3E3] py-4 text-center text-xs text-[#8A7159]">
+<div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+<div class="flex items-center gap-2">
+<span class="text-base">🧵</span>
+<span>Wealth Roots © 2026 • Diseñado con estilo artesanal y pedagógico para familias</span>
+</div>
+<div class="flex items-center gap-4 font-semibold">
+<a class="hover:text-[#4A3525] underline decoration-dotted" href="#ayuda">Guía de Crianza Financiera</a>
+<span>•</span>
+<a class="hover:text-[#4A3525] underline decoration-dotted" href="#soporte">Soporte para Padres</a>
+</div>
+</div>
+</footer>
+<!-- END: CozyFooter -->
+<!-- BEGIN: ModalReviewTask -->
+<div class="fixed inset-0 z-50 bg-[#4A3525]/40 backdrop-blur-sm hidden items-center justify-center p-4" id="review-modal">
+<div class="bg-[#FFFDF9] border-2 border-dashed border-[#C8B291] rounded-3xl max-w-lg w-full p-6 shadow-2xl relative">
+<!-- Close button -->
+<button class="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#FAF3E3] border border-dashed border-[#C8B291] text-[#7A624E] font-bold flex items-center justify-center hover:bg-[#F3E6D0]" onclick="closeModal()">
+✕
+</button>
+<!-- Modal Title -->
+<div class="flex items-center gap-2.5 pb-3 border-b border-dashed border-[#E8DCBF]">
+<span class="text-xl">🔍</span>
+<div>
+<h3 class="font-fredoka font-bold text-lg text-[#4A3525]" id="modal-task-title">Revisión de Tarea</h3>
+<p class="text-xs text-[#7A624E]" id="modal-task-category">Categoría</p>
+</div>
+</div>
+<!-- Modal Body -->
+<div class="mt-4 flex flex-col gap-3">
+<div>
+<span class="text-xs font-bold text-[#8C6D46] block uppercase tracking-wider mb-1">Evidencia entregada por Mateo</span>
+<div class="bg-[#FAF3E3] border border-dashed border-[#C8B291] rounded-2xl p-3.5 text-xs text-[#4A3525] leading-relaxed" id="modal-task-notes">
+Observaciones o notas entregadas.
+</div>
+</div>
+<div class="mt-1 hidden" id="modal-image-container">
+<span class="text-xs font-bold text-[#8C6D46] block uppercase tracking-wider mb-1">Fotografía adjunta</span>
+<div class="h-44 w-full bg-[#F5ECDB] rounded-2xl border-2 border-dashed border-[#C8B291] overflow-hidden flex items-center justify-center p-1">
+<img alt="Evidencia" class="h-full w-full object-cover rounded-xl" id="modal-img" src="">
+</div>
+</div>
+<!-- Parent Feedback Input -->
+<div class="mt-1">
+<label class="text-xs font-bold text-[#8C6D46] block uppercase tracking-wider mb-1" for="parent-comment">Mensaje de aliento o corrección</label>
+<textarea class="w-full bg-[#FAF3E3] border-2 border-dashed border-[#C8B291] rounded-xl px-3 py-2 text-xs text-[#4A3525] focus:ring-0 focus:border-[#569E3D]" id="parent-comment" placeholder="Ej: ¡Excelente trabajo Mateo, la habitación quedó reluciente!" rows="2"></textarea>
+</div>
+</div>
+<!-- Modal Actions -->
+<div class="mt-5 pt-3 border-t border-dashed border-[#E8DCBF] flex items-center justify-end gap-2.5">
+<button class="btn-plush text-xs font-bold text-[#7A624E] px-4 py-2 rounded-xl bg-[#FAF3E3] border border-dashed border-[#C8B291]" onclick="requestCorrection()">
+Pedir Corregir
+</button>
+<button class="btn-plush text-xs sm:text-sm font-fredoka font-semibold text-white bg-[#569E3D] hover:bg-[#498733] px-5 py-2 rounded-xl shadow-plush-green border border-white/30 knit-pattern-green flex items-center gap-1.5" onclick="approveFromModal()">
+<span>✅</span>
+<span>Aprobar y Premiar Monedas</span>
+</button>
+</div>
+</div>
+</div>
+<!-- END: ModalReviewTask -->
+<!-- BEGIN: Toast Notification -->
+<div class="fixed bottom-6 right-6 z-50 bg-[#FFFDF9] border-2 border-dashed border-[#569E3D] text-[#346622] font-fredoka px-4 py-3 rounded-2xl shadow-stitched transition-all transform translate-y-20 opacity-0 pointer-events-none flex items-center gap-2.5" id="toast">
+<span class="text-xl">🌟</span>
+<span class="text-sm font-semibold" id="toast-text">¡Tarea aprobada! 10 monedas enviadas a Mateo.</span>
+</div>
+<!-- END: Toast Notification -->
+<!-- BEGIN: Interactive Handlers JavaScript -->
+<script data-purpose="dashboard-functionality">
+    // State variables
+    let currentModalTargetCard = null;
+    let currentModalCoins = 10;
+    let remainingPendingCount = 3;
+    let currentSelectedReward = 10;
+    let currentMathOp = '+';
+
+    const farmStories = [
+      {
+        story: "La granjerita Sofía salió muy temprano al corral porque escuchó a su ovejita blanca balar buscando su desayuno. Al llegar, descubrió que las manzanas caídas del árbol formaban un caminito dulce directo hacia el estanque de los patos.",
+        question: "¿Por qué salió la granjerita Sofía muy temprano al corral?"
+      },
+      {
+        story: "El caballito marrón saltó la cerca de madera porque quería alcanzar el trébol más brillante de la colina. Mientras masticaba feliz bajo el sol, vio a Mateo sembrando semillas frescas de zanahoria en los surcos de la tierra.",
+        question: "¿Qué quería alcanzar el caballito marrón en la colina?"
+      },
+      {
+        story: "Los tres pollitos traviesos decidieron jugar a las escondidas detrás del saco de maíz. Mamá gallina cacareó tres veces y todos regresaron corriendo en fila para comer su trigo calientito.",
+        question: "¿Dónde se escondieron los tres pollitos traviesos?"
+      }
+    ];
+
+    // Tab switcher between the 3 main sections
+    function switchTab(target) {
+      const views = {
+        'realizadas': document.getElementById('view-realizadas'),
+        'asignar': document.getElementById('view-asignar'),
+        'progreso': document.getElementById('view-progreso')
+      };
+
+      const buttons = {
+        'realizadas': document.getElementById('tab-btn-realizadas'),
+        'asignar': document.getElementById('tab-btn-asignar'),
+        'progreso': document.getElementById('tab-btn-progreso')
+      };
+
+      // Show target view, hide others
+      Object.keys(views).forEach(key => {
+        if (key === target) {
+          views[key].classList.remove('hidden');
+          if (key === 'progreso' || key === 'realizadas') {
+            views[key].classList.add('flex');
+          }
+        } else {
+          views[key].classList.add('hidden');
+          views[key].classList.remove('flex');
+        }
+      });
+
+      // Update button styling states
+      Object.keys(buttons).forEach(key => {
+        const btn = buttons[key];
+        if (key === target) {
+          btn.className = "btn-plush px-5 py-2.5 rounded-full font-fredoka font-semibold text-sm transition-all flex items-center gap-2 shadow-plush-red knit-pattern-red text-white border border-white/30";
+          btn.setAttribute('data-active', 'true');
+        } else {
+          btn.className = "btn-plush px-5 py-2.5 rounded-full font-fredoka font-medium text-sm text-[#6B513C] hover:text-[#4A3525] hover:bg-[#FAF3E3] border border-transparent transition-all flex items-center gap-2";
+          btn.setAttribute('data-active', 'false');
+        }
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Category builder sub-navigation inside Asignar Tareas
+    function switchAssignCategory(cat) {
+      const catViews = {
+        'hogar': document.getElementById('cat-section-hogar'),
+        'math': document.getElementById('cat-section-math'),
+        'reading': document.getElementById('cat-section-reading')
+      };
+
+      const catBtns = {
+        'hogar': document.getElementById('cat-btn-hogar'),
+        'math': document.getElementById('cat-btn-math'),
+        'reading': document.getElementById('cat-btn-reading')
+      };
+
+      Object.keys(catViews).forEach(key => {
+        if (key === cat) {
+          catViews[key].classList.remove('hidden');
+          catViews[key].classList.add('flex');
+          catBtns[key].className = "btn-plush px-4 py-2 rounded-full font-fredoka font-semibold text-xs sm:text-sm transition-all border border-white/40 shadow-plush-red knit-pattern-red text-white flex items-center gap-1.5";
+        } else {
+          catViews[key].classList.add('hidden');
+          catViews[key].classList.remove('flex');
+          catBtns[key].className = "btn-plush px-4 py-2 rounded-full font-fredoka font-medium text-xs sm:text-sm text-[#6B513C] hover:text-[#4A3525] bg-[#FAF3E3] hover:bg-[#F3E7D0] border-2 border-dashed border-[#C8B291] transition-all flex items-center gap-1.5";
+        }
+      });
+
+      if (cat === 'math') {
+        updateMathPreview();
+      }
+    }
+
+    // Math operation selector
+    function setMathOperation(op, e) {
+      currentMathOp = op;
+      const buttons = document.querySelectorAll('#math-operations button');
+      buttons.forEach(btn => {
+        if (btn.getAttribute('data-op') === op) {
+          btn.className = "btn-plush px-4 py-1.5 rounded-2xl font-fredoka font-bold text-xs border border-white/30 text-white shadow-plush-red knit-pattern-red";
+        } else {
+          btn.className = "btn-plush px-4 py-1.5 rounded-2xl font-fredoka font-semibold text-xs border-2 border-dashed border-[#C8B291] bg-[#FAF3E3] text-[#5C422D]";
+        }
+      });
+      updateMathPreview();
+    }
+
+    // Reactive Math preview generator
+    function updateMathPreview() {
+      const select = document.getElementById('math-item-select');
+      const [icon, label] = select.value.split('|');
+      let n1 = parseInt(document.getElementById('math-qty-1').value) || 1;
+      let n2 = parseInt(document.getElementById('math-qty-2').value) || 1;
+      
+      // Clamp for visual sanity
+      n1 = Math.min(Math.max(1, n1), 10);
+      n2 = Math.min(Math.max(1, n2), 10);
+
+      document.getElementById('math-preview-operator').innerText = currentMathOp === '+' ? '＋' : (currentMathOp === '-' ? '−' : (currentMathOp === '×' ? '×' : '÷'));
+      document.getElementById('math-preview-label').innerText = `${n1} ${icon} ${currentMathOp} ${n2} ${icon} = ?`;
+      document.getElementById('math-preview-unit').innerText = label;
+
+      // Render repeating icons
+      const group1 = document.getElementById('math-visual-group1');
+      const group2 = document.getElementById('math-visual-group2');
+      
+      group1.innerHTML = Array(n1).fill(`<span>${icon}</span>`).join('');
+      group2.innerHTML = Array(n2).fill(`<span>${icon}</span>`).join('');
+    }
+
+    // Generate new AI story
+    function generateNewStory() {
+      const randomIdx = Math.floor(Math.random() * farmStories.length);
+      const chosen = farmStories[randomIdx];
+      document.getElementById('reading-story-box').innerText = `"${chosen.story}"`;
+      document.getElementById('reading-question').value = chosen.question;
+      showToast("✨ ¡Nueva historia campestre generada con éxito!");
+    }
+
+    // Reward pills selection
+    function selectReward(coins, btn) {
+      currentSelectedReward = coins;
+      const container = document.getElementById('reward-pills');
+      const pills = container.querySelectorAll('button');
+      pills.forEach(p => {
+        p.className = "btn-plush px-3 py-1.5 rounded-full font-fredoka font-semibold text-xs border border-dashed border-[#C8B291] bg-[#FAF3E3] text-[#5C422D]";
+      });
+      btn.className = "btn-plush px-3 py-1.5 rounded-full font-fredoka font-bold text-xs border border-white/40 text-white shadow-plush-gold knit-pattern-amber";
+    }
+
+    // Review Modal Operations
+    function openModal(title, category, coins, imageSrc, notes, cardId) {
+      document.getElementById('modal-task-title').innerText = title;
+      document.getElementById('modal-task-category').innerText = category;
+      document.getElementById('modal-task-notes').innerText = notes;
+      currentModalCoins = coins;
+      currentModalTargetCard = cardId;
+
+      const imgContainer = document.getElementById('modal-image-container');
+      const imgElem = document.getElementById('modal-img');
+
+      if (imageSrc) {
+        imgElem.src = imageSrc;
+        imgContainer.classList.remove('hidden');
+      } else {
+        imgContainer.classList.add('hidden');
+      }
+
+      const modal = document.getElementById('review-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('review-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function approveFromModal() {
+      if (currentModalTargetCard) {
+        approveTask(currentModalTargetCard, currentModalCoins);
+      }
+      closeModal();
+    }
+
+    function requestCorrection() {
+      closeModal();
+      showToast("📝 Se ha enviado una nota a Mateo pidiendo corregir la tarea.");
+    }
+
+    // Task Approval Handler
+    function approveTask(cardId, coins) {
+      const card = document.getElementById(cardId);
+      if (card) {
+        card.style.opacity = '0.35';
+        card.style.pointerEvents = 'none';
+        card.style.filter = 'grayscale(0.6)';
+        
+        remainingPendingCount = Math.max(0, remainingPendingCount - 1);
+        const badgeCounter = document.getElementById('pending-badge-counter');
+        const headerPill = document.getElementById('pending-header-pill');
+        if (badgeCounter) badgeCounter.innerText = remainingPendingCount;
+        if (headerPill) headerPill.innerText = `${remainingPendingCount} pendientes hoy`;
+
+        // Update top coins display
+        const coinsElem = document.getElementById('header-user-coins');
+        if (coinsElem) {
+          const currentTotal = parseInt(coinsElem.innerText) || 30;
+          coinsElem.innerText = `${currentTotal + coins} Monedas`;
+        }
+
+        showToast(`¡Excelente! Tarea validada y +${coins} monedas añadidas a Mateo.`);
+      }
+    }
+
+    // New task creation
+    function handleCreateTask(e) {
+      e.preventDefault();
+      let taskName = "Nueva Misión";
+      const hogarTitle = document.getElementById('hogar-title').value;
+      if (hogarTitle) taskName = hogarTitle;
+
+      showToast(`¡Nueva misión asignada con recompensa de +${currentSelectedReward} 🪙!`);
+      
+      setTimeout(() => {
+        switchTab('realizadas');
+      }, 700);
+    }
+
+    // Toast message trigger
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastText = document.getElementById('toast-text');
+      toastText.innerText = message;
+      
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3500);
+    }
+
+  </script>
+<!-- END: Interactive Handlers JavaScript -->
+
+<span id="PING_CONTENT_PUSH_NOTIFICATION" style="display: none;"></span>
+
+<script>
+  const CLAVE = 'granja_estado';
+
+  // 1. Cuando papá publica una tarea nueva en "Asignar Tareas"
+  const formAsignar = document.querySelector('#view-asignar form');
+  if (formAsignar) {
+    formAsignar.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      let tituloTarea = 'Nueva misión de la granja';
+      const secHogar = document.getElementById('cat-section-hogar');
+      const secMath  = document.getElementById('cat-section-math');
+      const secRead  = document.getElementById('cat-section-reading');
+
+      if (secHogar && !secHogar.classList.contains('hidden')) {
+        tituloTarea = document.getElementById('hogar-title').value || 'Tarea del hogar';
+      } else if (secMath && !secMath.classList.contains('hidden')) {
+        tituloTarea = document.getElementById('math-preview-label').textContent.replace('= ?', '').trim();
+      } else if (secRead && !secRead.classList.contains('hidden')) {
+        tituloTarea = document.getElementById('reading-question').value || 'Lectura de la granja';
+      }
+
+      const btnActivo = document.querySelector('#reward-pills .knit-pattern-amber');
+      const monedas = btnActivo ? parseInt(btnActivo.textContent.replace(/\D/g, '')) : 10;
+
+      const estado = JSON.parse(localStorage.getItem(CLAVE)) || {};
+      if (!estado.tareas) estado.tareas = [];
+      estado.tareas.unshift({
+        id: Date.now(),
+        titulo: tituloTarea,
+        monedas: monedas,
+        hecha: false
+      });
+      localStorage.setItem(CLAVE, JSON.stringify(estado));
+
+      alert(`¡Tarea "${tituloTarea}" (+${monedas} 🪙) enviada a la granja de Mateo!`);
+    });
+  }
+
+  // 2. Cuando papá aprueba una tarea, suma las monedas directamente al saldo de la tienda/granja
+  const approveOriginal = window.approveTask;
+  window.approveTask = function(cardId, monedas) {
+    const estado = JSON.parse(localStorage.getItem(CLAVE)) || {};
+    estado.monedas = (estado.monedas ?? 750) + Number(monedas);
+    localStorage.setItem(CLAVE, JSON.stringify(estado));
+
+    if (typeof approveOriginal === 'function') {
+      approveOriginal(cardId, monedas);
+    }
+  };
+</script>
+
+</body></html>
